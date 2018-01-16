@@ -2,6 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<!-- 
+	width=device-width,		和屏幕的宽高一致
+	height=device-height,
+	initial-scale=1.0,   	原有尺度
+	minumum-scale=1.0,		最小尺度
+	maximum-scale=1.0,		最大尺度
+	user-scalable=no		用户无法通过缩放来改变显示大小
+	 -->
+	<meta name="viewport"
+		content="width=device-width,
+				height=device-height,
+				initial-scale=1.0,
+				minumum-scale=1.0,
+				maximum-scale=1.0,
+				user-scalable=no" 	/>
 	<title>2048</title>
 	<link rel="stylesheet" href="2048.css">
 	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
@@ -16,7 +31,8 @@
 		<p>score:<span id="score">0</span></p>
 	</header>
 
-	<div id="grid-container"><!-- 游戏区：4x4格子 -->
+	
+	<div id="grid-container">
 		<div class="grid-cell" id="grid-cell-0-0"></div>
 		<div class="grid-cell" id="grid-cell-0-1"></div>
 		<div class="grid-cell" id="grid-cell-0-2"></div>

@@ -8,8 +8,8 @@ function showNumberWithAnimation(i,j,randNumber) {
 
 	//动画效果    50毫秒
 	numberCell.animate({
-		width:"100px",
-		height:"100px",
+		width:cellSideLength,
+		height:cellSideLength,
 		top:getPosTop(i,j),
 		left:getPosLeft(i,j)
 	},50);
