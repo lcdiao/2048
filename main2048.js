@@ -30,6 +30,8 @@ function init(){
 	}
 
 	updateBoardView();
+
+	score = 0;
 }
 
 
@@ -146,6 +148,11 @@ function moveLeft(){
 						//add
 						board[i][k]+=board[i][j];//相加
 						board[i][j]=0;
+
+						//add score
+						score+=board[i][k];
+						updateScore(score);
+
 						continue;
 					}
 				}
@@ -179,6 +186,11 @@ function moveRight(){
 						//add
 						board[i][k]+=board[i][j];//相加
 						board[i][j]=0;
+
+						//add score
+						score+=board[i][k];
+						updateScore(score);
+
 						continue;
 					}
 				}
@@ -214,6 +226,11 @@ function moveUp(){
 						//add
 						board[k][j]+=board[i][j];//相加
 						board[i][j]=0;
+
+						//add score
+						score+=board[k][j];
+						updateScore(score);
+
 						continue;
 					}
 				}
@@ -248,6 +265,11 @@ function moveDown(){
 						//add
 						board[k][j]+=board[i][j];//相加
 						board[i][j]=0;
+
+						//add score
+						score+=board[k][j];
+						updateScore(score);
+						
 						continue;
 					}
 				}
