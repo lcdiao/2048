@@ -40,3 +40,22 @@ function nospace(board){
 				return false;
 	return true;
 }
+
+//判断是否移动到左侧
+function canMoveLeft(board){
+
+	for (var i = 0; i < 4; i++) 
+		for(var j=1;j<4;j++)	//第0列不需要遍历
+			if(board[i][j]!=0)
+				if(board[i][j-1]==0||board[i][j-1]==board[i][j])
+					return true;
+
+	return false;
+}
+
+function noBlockHorizontal(row,col1,col2,board){//判断第col1列到col2列之间是否有障碍物
+	for(var i=col1+1;i<col2;i++)
+		if(board[row][i]!=0)
+			return false;
+	return true;
+}

@@ -81,3 +81,72 @@ function generateOneNumber(){
 
 	return true;
 }
+
+
+$(document).keydown(function (event){
+	switch(event.keyCode){
+		case 37: 		//left
+			if(moveLeft()){
+				generateOneNumber();//添加一个随机数
+				isgameover();//判断是否结束
+			};
+			break;
+		case 38: 		//up
+			if(moveUp()){
+				generateOneNumber();//添加一个随机数
+				isgameover();//判断是否结束
+			};
+			break;
+		case 39: 		//right
+			if(moveRight()){
+				generateOneNumber();//添加一个随机数
+				isgameover();//判断是否结束
+			};
+			break;
+		case 40: 		//down
+			if(moveDown()){
+				generateOneNumber();//添加一个随机数
+				isgameover();//判断是否结束
+			};
+			break;
+		default:
+			break;
+	}
+})
+
+function isgameover(){
+
+}
+
+function moveLeft(){
+
+	if(!canMoveLeft(board))
+		return false;
+
+	//moveLeft
+	for (var i = 0; i < 4; i++) 
+		for(var j=1;j<4;j++){
+			if(board[i][j]!=0){
+				for(var k=0;k<j;k++){
+					if(board[i][k]==0&&noBlockHorizontal(i,k,j,board)){
+						//move
+						showMoveAnimation(i,j,i,k);//从i,j位置移动到i,k位置(动画效果)
+						board[i][k]=board[i][j];
+						board[i][j]=0;
+						continue;
+					}
+					else if(board[i][k]==board[i][j]&&noBlockHorizontal(i,k,j,board)){
+						//move
+						showMoveAnimation(i,j,i,k);
+						//add
+						board[i][k]+=board[i][j];//相加
+						board[i][j]=0;
+						continue;
+					}
+				}
+			}
+		}
+
+	setTimeout("updateBoardView()",200);//刷新格子
+	return true;
+}
