@@ -65,9 +65,8 @@ function canMoveRight(board){
 }
 //判断是否移动到上侧
 function canMoveUp(board){
-
-	for (var i=1;i<4;i++) 	//第0行不需要遍历
-		for(var j=0;j<4;j++)
+	for(var j=0;j<4;j++)
+		for (var i=1;i<4;i++) 	//第0行不需要遍历
 			if(board[i][j]!=0)
 				if(board[i-1][j]==0||board[i-1][j]==board[i][j])
 					return true;
@@ -76,9 +75,8 @@ function canMoveUp(board){
 }
 //判断是否移动到下侧
 function canMoveDown(board){
-
-	for (var i=2;i>=0;i--) 	//第3行不需要遍历
-		for(var j=0;j<4;j++)
+	for(var j=0;j<4;j++)
+		for (var i=2;i>=0;i--) 	//第3行不需要遍历
 			if(board[i][j]!=0)
 				if(board[i+1][j]==0||board[i+1][j]==board[i][j])
 					return true;
@@ -97,5 +95,12 @@ function noBlockVertical(row1,row2,col,board){//判断第row1行到row2行之间
 	for(var i=row1+1;i<row2;i++)
 		if(board[i][col]!=0)
 			return false;
+	return true;
+}
+
+function nomove(board){
+	if(canMoveDown(board)||canMoveUp(board)||canMoveRight(board)||canMoveLeft(board)){
+		return false;
+	}
 	return true;
 }

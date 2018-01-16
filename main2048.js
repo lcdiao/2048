@@ -87,26 +87,26 @@ $(document).keydown(function (event){
 	switch(event.keyCode){
 		case 37: 		//left
 			if(moveLeft()){
-				setTimeout("generateOneNumber()",190);//添加一个随机数
-				isgameover();//判断是否结束
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		case 38: 		//up
 			if(moveUp()){
-				setTimeout("generateOneNumber()",190);//添加一个随机数
-				isgameover();//判断是否结束
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		case 39: 		//right
 			if(moveRight()){
-				setTimeout("generateOneNumber()",190);//添加一个随机数
-				isgameover();//判断是否结束
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		case 40: 		//down
 			if(moveDown()){
-				setTimeout("generateOneNumber()",190);//添加一个随机数
-				isgameover();//判断是否结束
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		default:
@@ -115,7 +115,12 @@ $(document).keydown(function (event){
 })
 
 function isgameover(){
-
+	if(nospace(board)&&nomove(board)){
+		gameover();
+	}
+}
+function gameover(){
+	alert('gameover');
 }
 
 function moveLeft(){
@@ -191,8 +196,9 @@ function moveUp(){
 	}
 
 	//moveUp
-	for (var i=1;i<4;i++) 	//第0行不需要遍历
-		for(var j=0;j<4;j++){
+	
+	for(var j=0;j<4;j++){
+		for (var i=1;i<4;i++) 	//第0行不需要遍历
 			if(board[i][j]!=0){
 				for(var k=0;k<i;k++){
 					if(board[k][j]==0&&noBlockVertical(k,i,j,board)){
@@ -212,7 +218,7 @@ function moveUp(){
 					}
 				}
 			}
-		}
+	}
 
 	setTimeout("updateBoardView()",200);//刷新格子
 	return true;
@@ -225,8 +231,8 @@ function moveDown(){
 	}
 
 	//moveUp
-	for (var i=2;i>=0;i--) 	//第3行不需要遍历
-		for(var j=0;j<4;j++){
+	for(var j=0;j<4;j++){
+		for (var i=2;i>=0;i--) 	//第3行不需要遍历
 			if(board[i][j]!=0){
 				for(var k=3;k>i;k--){
 					if(board[k][j]==0&&noBlockVertical(i,k,j,board)){
@@ -246,7 +252,7 @@ function moveDown(){
 					}
 				}
 			}
-		}
+	}
 
 	setTimeout("updateBoardView()",200);//刷新格子
 	return true;
