@@ -87,25 +87,25 @@ $(document).keydown(function (event){
 	switch(event.keyCode){
 		case 37: 		//left
 			if(moveLeft()){
-				generateOneNumber();//添加一个随机数
+				setTimeout("generateOneNumber()",190);//添加一个随机数
 				isgameover();//判断是否结束
 			};
 			break;
 		case 38: 		//up
 			if(moveUp()){
-				generateOneNumber();//添加一个随机数
+				setTimeout("generateOneNumber()",190);//添加一个随机数
 				isgameover();//判断是否结束
 			};
 			break;
 		case 39: 		//right
 			if(moveRight()){
-				generateOneNumber();//添加一个随机数
+				setTimeout("generateOneNumber()",190);//添加一个随机数
 				isgameover();//判断是否结束
 			};
 			break;
 		case 40: 		//down
 			if(moveDown()){
-				generateOneNumber();//添加一个随机数
+				setTimeout("generateOneNumber()",190);//添加一个随机数
 				isgameover();//判断是否结束
 			};
 			break;
@@ -140,6 +140,107 @@ function moveLeft(){
 						showMoveAnimation(i,j,i,k);
 						//add
 						board[i][k]+=board[i][j];//相加
+						board[i][j]=0;
+						continue;
+					}
+				}
+			}
+		}
+
+	setTimeout("updateBoardView()",200);//刷新格子
+	return true;
+}
+
+function moveRight(){
+
+	if(!canMoveRight(board))
+		return false;
+
+	//moveRight
+	for (var i = 0; i < 4; i++) 
+		for(var j=2;j>=0;j--){		//第3列不需要遍历
+			if(board[i][j]!=0){
+				for(var k=3;k>j;k--){
+					if(board[i][k]==0&&noBlockHorizontal(i,j,k,board)){
+						//move
+						showMoveAnimation(i,j,i,k);//从i,j位置移动到i,k位置(动画效果)
+						board[i][k]=board[i][j];
+						board[i][j]=0;
+						continue;
+					}
+					else if(board[i][k]==board[i][j]&&noBlockHorizontal(i,j,k,board)){
+						//move
+						showMoveAnimation(i,j,i,k);
+						//add
+						board[i][k]+=board[i][j];//相加
+						board[i][j]=0;
+						continue;
+					}
+				}
+			}
+		}
+
+	setTimeout("updateBoardView()",200);//刷新格子
+	return true;
+}
+
+function moveUp(){
+
+	if(!canMoveUp(board)){
+		return false;
+	}
+
+	//moveUp
+	for (var i=1;i<4;i++) 	//第0行不需要遍历
+		for(var j=0;j<4;j++){
+			if(board[i][j]!=0){
+				for(var k=0;k<i;k++){
+					if(board[k][j]==0&&noBlockVertical(k,i,j,board)){
+						//move
+						showMoveAnimation(i,j,k,j);//从i,j位置移动到k,j位置(动画效果)
+						board[k][j]=board[i][j];
+						board[i][j]=0;
+						continue;
+					}
+					else if(board[k][j]==board[i][j]&&noBlockVertical(k,i,j,board)){
+						//move
+						showMoveAnimation(i,j,k,j);
+						//add
+						board[k][j]+=board[i][j];//相加
+						board[i][j]=0;
+						continue;
+					}
+				}
+			}
+		}
+
+	setTimeout("updateBoardView()",200);//刷新格子
+	return true;
+}
+
+function moveDown(){
+
+	if(!canMoveDown(board)){
+		return false;
+	}
+
+	//moveUp
+	for (var i=2;i>=0;i--) 	//第3行不需要遍历
+		for(var j=0;j<4;j++){
+			if(board[i][j]!=0){
+				for(var k=3;k>i;k--){
+					if(board[k][j]==0&&noBlockVertical(i,k,j,board)){
+						//move
+						showMoveAnimation(i,j,k,j);//从i,j位置移动到k,j位置(动画效果)
+						board[k][j]=board[i][j];
+						board[i][j]=0;
+						continue;
+					}
+					else if(board[k][j]==board[i][j]&&noBlockVertical(i,k,j,board)){
+						//move
+						showMoveAnimation(i,j,k,j);
+						//add
+						board[k][j]+=board[i][j];//相加
 						board[i][j]=0;
 						continue;
 					}
