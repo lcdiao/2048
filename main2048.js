@@ -9,6 +9,8 @@ function newgame(){
 	//初始化棋盘格
 	init();
 	//在随机两个格子生产数字
+	generateOneNumber();
+	generateOneNumber();
 }
 
 //初始化棋盘格
@@ -54,4 +56,28 @@ function updateBoardView(){
 			}
 		}
 	}
+}
+
+function generateOneNumber(){
+	if(nospace(board))
+		return false;//无法生成格子
+
+	//随机一个位置
+	var randx = parseInt(Math.floor(Math.random()*4));	//x坐标:取得随机数并向下取整 再强转为整型
+	var randy = parseInt(Math.floor(Math.random()*4));	//y坐标:取得随机数并向下取整 再强转为整型
+	while(true){	//取到可用坐标
+		if(board[randx][randy]==0)
+			break;
+		randx = parseInt(Math.floor(Math.random()*4));
+		randy = parseInt(Math.floor(Math.random()*4));
+	}
+
+	//随机一个数字
+	var randNumber = Math.random() < 0.5 ? 2 : 4;	//获得2或4
+
+	//在随机位置显示随机数字
+	board[randx][randy]=randNumber;
+	showNumberWithAnimation(randx,randy,randNumber);//生成随机数动画
+
+	return true;
 }

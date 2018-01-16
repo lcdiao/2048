@@ -25,9 +25,18 @@ function getNumberBackgroundColor(number){
 	return "black";
 }
 
-function getNumberColor(){
+function getNumberColor(number){
 	if(number<=4)
 		return "#776e65";
 
 	return "white";
+}
+
+//判断棋盘格是否还有空间
+function nospace(board){
+	for (var i = 0; i < 4; i++) 
+		for(var j=0;j<4;j++)
+			if(board[i][j]==0)
+				return false;
+	return true;
 }
