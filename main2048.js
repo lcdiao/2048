@@ -2,6 +2,12 @@ var board = new Array();// 小格子！
 var score = 0;	
 var hasConflicted = new Array();	
 
+//触控 坐标
+var startx = 0;
+var starty = 0;
+var endx = 0;
+var endy = 0;
+
 $(document).ready(function() {
 	prepareForMobile();
 	newgame();
@@ -153,6 +159,57 @@ $(document).keydown(function (event){
 			break;
 	}
 })
+
+
+//触控事件
+document.addEventListener('touchstart',function(event){
+	startx = event.touches[0].pageX;	//获得触摸起始位置的横纵坐标
+	starty = event.touches[0].pageY;
+})
+document.addEventListener('touchend',function(event){
+	endx = event.changedTouches[0].pageX;	//获得触摸结束位置的横纵坐标
+	endy = event.changedTouches[0].pageY;
+
+	var deltax = endx - startx;
+	var deltay = endy - starty;
+	//在x轴方向进行滑动
+	if(Math.abs(deltax)>=Math.abs(deltay)){
+		if(deltax>0){
+			//move right
+			if(moveRight()){
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
+			};
+		}
+		else{
+			//move left
+			if(moveLeft()){
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
+			};
+		}
+	}
+	//在y轴方向进行滑动
+	else{
+		if(deltay>0){
+			//move down
+			if(moveDown()){
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
+			};
+		}
+		else{
+			//move up
+			if(moveUp()){
+				setTimeout("generateOneNumber()",210);//添加一个随机数
+				setTimeout("isgameover()",300);//判断是否结束
+			};
+		}
+
+	}
+})
+
+
 
 function isgameover(){
 	if(nospace(board)&&nomove(board)){
