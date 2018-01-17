@@ -130,26 +130,34 @@ function generateOneNumber(){
 
 
 $(document).keydown(function (event){
+
+	//event.preventDefault();//阻挡原本的默认效果(有滚动条的情况下，按下键的时候滚动条不会滚动)
+	//所有按键的效果都会被屏蔽
+
 	switch(event.keyCode){
 		case 37: 		//left
+			event.preventDefault();	//判断出按下的键后再阻挡按键的默认效果
 			if(moveLeft()){
 				setTimeout("generateOneNumber()",210);//添加一个随机数
 				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		case 38: 		//up
+			event.preventDefault();
 			if(moveUp()){
 				setTimeout("generateOneNumber()",210);//添加一个随机数
 				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		case 39: 		//right
+			event.preventDefault();
 			if(moveRight()){
 				setTimeout("generateOneNumber()",210);//添加一个随机数
 				setTimeout("isgameover()",300);//判断是否结束
 			};
 			break;
 		case 40: 		//down
+			event.preventDefault();
 			if(moveDown()){
 				setTimeout("generateOneNumber()",210);//添加一个随机数
 				setTimeout("isgameover()",300);//判断是否结束
@@ -166,12 +174,21 @@ document.addEventListener('touchstart',function(event){
 	startx = event.touches[0].pageX;	//获得触摸起始位置的横纵坐标
 	starty = event.touches[0].pageY;
 })
+
+document.addEventListener('touchmove',function(){
+	event.preventDefault();
+})
+
 document.addEventListener('touchend',function(event){
 	endx = event.changedTouches[0].pageX;	//获得触摸结束位置的横纵坐标
 	endy = event.changedTouches[0].pageY;
 
 	var deltax = endx - startx;
 	var deltay = endy - starty;
+
+	if(Math.abs(deltax)<0.2*documentWidth&&Math.abs(deltay)<0.2*documentWidth)
+		return ;
+
 	//在x轴方向进行滑动
 	if(Math.abs(deltax)>=Math.abs(deltay)){
 		if(deltax>0){
@@ -205,7 +222,6 @@ document.addEventListener('touchend',function(event){
 				setTimeout("isgameover()",300);//判断是否结束
 			};
 		}
-
 	}
 })
 
